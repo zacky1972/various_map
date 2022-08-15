@@ -9,7 +9,7 @@ You can add `various_map` as dependencies in your `mix.exs`. At the moment you w
 ```elixir
 def deps do
   [
-    {:various_map, "~> 0.1.0-dev", github: "zacky1972/various_map"}
+    {:various_map, "~> 0.1", github: "zacky1972/various_map"}
   ]
 end
 ```
