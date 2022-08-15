@@ -7,7 +7,9 @@ defmodule VariousMap.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14-rc",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      name: "VariousMap",
+      docs: docs()
     ]
   end
 
@@ -24,6 +26,13 @@ defmodule VariousMap.MixProject do
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
+    ]
+  end
+
+  defp docs do
+    [
+      main: "README",
+      extras: ["README.md"]
     ]
   end
 end
