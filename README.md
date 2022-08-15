@@ -1,6 +1,6 @@
 # VariousMap
 
-**TODO: Add description**
+Map implementations in various ways.
 
 ## Installation
 
