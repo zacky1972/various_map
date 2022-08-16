@@ -4,20 +4,17 @@ Map implementations in various ways.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `various_map` to your list of dependencies in `mix.exs`:
+You can add `various_map` as dependencies in your `mix.exs`. At the moment you will have to use a Git dependency while we work on our first release:
 
 ```elixir
 def deps do
   [
-    {:various_map, "~> 0.1.0"}
+    {:various_map, "~> 0.1", github: "zacky1972/various_map"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/various_map>.
+Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc) by `mix docs`.
 
 ## License
 
