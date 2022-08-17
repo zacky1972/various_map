@@ -159,7 +159,8 @@ defmodule VariousMap.EtsGraph do
        [:"$_"]}
     ])
     |> case do
-      [] -> %{}
+      [] ->
+        %{}
 
       list ->
         list
