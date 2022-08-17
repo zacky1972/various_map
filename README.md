@@ -279,6 +279,89 @@ MapGraph.put        1.78 M - 1.83x slower +253.89 ns
 4. But, total execution time of generating the graph in this case is 41,416.62 msec.
 5. About 64% is the ratio of generating the graph to `MapGraph.put`, and about 36% is some overheads. What does the overheads arise from?
 
+### EtsMap and Benchmark of it
+
+`VariousMap.EtsMap` is a module compatible to `Map` but using ETS.
+
+
+Run `mix run -r bench/ets_map_bench.exs`, then you'll get results similar to the following:
+
+```
+% mix run -r bench/ets_map_bench.exs  
+Compiling 1 file (.ex)
+Operating System: macOS
+CPU Information: Apple M1
+Number of Available Cores: 8
+Available memory: 16 GB
+Elixir 1.14.0-rc.1
+Erlang 25.0.3
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+reduction time: 0 ns
+parallel: 1
+inputs: size 10, size 100, size 1000, size 10000, size 100000
+Estimated total run time: 1.17 min
+
+Benchmarking ETS Map get with input size 10 ...
+Benchmarking ETS Map get with input size 100 ...
+Benchmarking ETS Map get with input size 1000 ...
+Benchmarking ETS Map get with input size 10000 ...
+Benchmarking ETS Map get with input size 100000 ...
+Benchmarking ETS Map put with input size 10 ...
+Benchmarking ETS Map put with input size 100 ...
+Benchmarking ETS Map put with input size 1000 ...
+Benchmarking ETS Map put with input size 10000 ...
+Benchmarking ETS Map put with input size 100000 ...
+
+##### With input size 10 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map get      345.20 K        2.90 μs    ±24.79%        2.80 μs        5.22 μs
+ETS Map put      335.31 K        2.98 μs    ±27.85%        2.88 μs        5.28 μs
+
+Comparison: 
+ETS Map get      345.20 K
+ETS Map put      335.31 K - 1.03x slower +0.0854 μs
+
+##### With input size 100 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map get       10.50 M      0.0952 μs    ±98.08%      0.0840 μs       0.125 μs
+ETS Map put      0.0394 M       25.38 μs     ±2.86%       25.18 μs       27.85 μs
+
+Comparison: 
+ETS Map get       10.50 M
+ETS Map put      0.0394 M - 266.58x slower +25.29 μs
+
+##### With input size 1000 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map get        2.90 K      344.34 μs     ±1.90%      343.56 μs      363.19 μs
+ETS Map put        2.82 K      354.14 μs     ±3.78%      351.93 μs      382.72 μs
+
+Comparison: 
+ETS Map get        2.90 K
+ETS Map put        2.82 K - 1.03x slower +9.80 μs
+
+##### With input size 10000 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map put        3.09 M      323.18 ns   ±119.19%         250 ns     3153.70 ns
+ETS Map get        2.47 M      405.37 ns   ±172.39%         208 ns     3503.25 ns
+
+Comparison: 
+ETS Map put        3.09 M
+ETS Map get        2.47 M - 1.25x slower +82.19 ns
+
+##### With input size 100000 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map put      435.91 K        2.29 μs    ±64.56%        1.83 μs       11.48 μs
+ETS Map get      311.11 K        3.21 μs    ±53.78%        2.85 μs       14.58 μs
+
+Comparison: 
+ETS Map put      435.91 K
+ETS Map get      311.11 K - 1.40x slower +0.92 μs
+```
+
 ## License
 
 Copyright (c) 2022 University of Kitakyushu
