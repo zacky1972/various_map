@@ -1,6 +1,6 @@
 defmodule VariousMap.EtsMap do
   @moduledoc """
-  A map using ETS.
+  A global map using ETS.
   """
 
   @type t() :: atom()
