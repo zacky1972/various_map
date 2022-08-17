@@ -27,8 +27,7 @@ v_sizes = [10, 100, 1_000, 5_000]
 
 random_edges =
   Enum.map(v_sizes, fn v_size ->
-    {time, result} =
-      :timer.tc(fn -> RandomMapGraph.random_edges(v_size) end)
+    {time, result} = :timer.tc(fn -> RandomMapGraph.random_edges(v_size) end)
 
     IO.puts("time of create random_edges: #{time / 1000}msec.")
     result
@@ -43,13 +42,12 @@ inputs =
         "Graph {num_vertex, num_edge} = {#{v_size}, #{e_size}}",
         {
           {v_size, e_size},
-          fn ->
-            {time, result} =
-              :timer.tc(fn -> RandomMapGraph.generate(edges, e_size) end)
+          (fn ->
+             {time, result} = :timer.tc(fn -> RandomMapGraph.generate(edges, e_size) end)
 
-            IO.puts("time of create MapGraph: #{time / 1000}msec")
-            result
-          end.()
+             IO.puts("time of create MapGraph: #{time / 1000}msec")
+             result
+           end).()
         }
       }
     end)
