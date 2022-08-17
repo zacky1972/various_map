@@ -362,6 +362,187 @@ ETS Map put      435.91 K
 ETS Map get      311.11 K - 1.40x slower +0.92 μs
 ```
 
+### EtsGraph and Benchmark of it
+
+`VariousMap.EtsGraph` is a module for a global graph that can use for a directed graph using ETS.
+
+
+Run `mix run -r bench/ets_graph_bench.exs`, then you'll get results similar to the following:
+
+```
+% mix run -r bench/ets_graph_bench.exs
+Compiling 1 file (.ex)
+time of create random_edges: 0.597msec.
+time of create random_edges: 2.706msec.
+time of create random_edges: 570.753msec.
+time of create random_edges: 28044.329msec.
+time of create EtsGraph: 0.028msec
+time of create EtsGraph: 0.01msec
+time of create EtsGraph: 0.028msec
+time of create EtsGraph: 0.024msec
+time of create EtsGraph: 0.051msec
+time of create EtsGraph: 2.819msec
+time of create EtsGraph: 0.262msec
+time of create EtsGraph: 0.532msec
+time of create EtsGraph: 469.701msec
+time of create EtsGraph: 2.299msec
+time of create EtsGraph: 3.591msec
+time of create EtsGraph: 22082.453msec
+Operating System: macOS
+CPU Information: Apple M1
+Number of Available Cores: 8
+Available memory: 16 GB
+Elixir 1.14.0-rc.1
+Erlang 25.0.3
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+reduction time: 0 ns
+parallel: 1
+{10, 20}, Graph {num_vertex, num_edge} = {10, 90}, Graph {num_vertex, num_edge} = {100, 100}, Graph {num_vertex, num_edge} = {100, 200}, Graph {num_vertex, num_edge} = {100, 9900}, Graph {num_vertex, num_edge} = {1000, 1000}, Graph {num_vertex, num_edge} = {1000, 2000}, Graph {num_vertex, num_edge} = {1000, 999000}, Graph {num_vertex, num_edge} = {5000, 10000}, Graph {num_vertex, num_edge} = {5000, 24995000}, Graph {num_vertex, num_edge} = {5000, 5000}
+Estimated total run time: 2.80 min
+
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {10, 10} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {10, 20} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {10, 90} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {100, 100} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {100, 200} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {100, 9900} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {1000, 1000} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {1000, 2000} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {1000, 999000} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {5000, 10000} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {5000, 24995000} ...
+Benchmarking EtsGraph.get with input Graph {num_vertex, num_edge} = {5000, 5000} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {10, 10} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {10, 20} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {10, 90} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {100, 100} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {100, 200} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {100, 9900} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {1000, 1000} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {1000, 2000} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {1000, 999000} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {5000, 10000} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {5000, 24995000}} ...
+Benchmarking EtsGraph.put with input Graph {num_vertex, num_edge} = {5000, 5000} ...
+
+##### With input Graph {num_vertex, num_edge} = {10, 10} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.69 M      270.91 ns  ±9016.00%         209 ns         333 ns
+EtsGraph.put        3.25 M      307.91 ns  ±8365.53%         250 ns         375 ns
+
+Comparison: 
+EtsGraph.get        3.69 M
+EtsGraph.put        3.25 M - 1.14x slower +37.00 ns
+
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.74 M      267.05 ns  ±8233.34%         209 ns         333 ns
+EtsGraph.put        3.27 M      305.47 ns  ±7981.60%         250 ns         375 ns
+
+Comparison: 
+EtsGraph.get        3.74 M
+EtsGraph.put        3.27 M - 1.14x slower +38.41 ns
+
+##### With input Graph {num_vertex, num_edge} = {10, 90} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.66 M      273.10 ns  ±8626.86%         250 ns         333 ns
+EtsGraph.put        3.28 M      305.34 ns  ±8001.07%         250 ns         375 ns
+
+Comparison: 
+EtsGraph.get        3.66 M
+EtsGraph.put        3.28 M - 1.12x slower +32.25 ns
+
+##### With input Graph {num_vertex, num_edge} = {100, 100} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.63 M      275.17 ns  ±7182.81%         250 ns         333 ns
+EtsGraph.put        3.04 M      329.13 ns  ±7611.84%         292 ns         417 ns
+
+Comparison: 
+EtsGraph.get        3.63 M
+EtsGraph.put        3.04 M - 1.20x slower +53.96 ns
+
+##### With input Graph {num_vertex, num_edge} = {100, 200} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.55 M      282.05 ns  ±8065.72%         250 ns         333 ns
+EtsGraph.put        3.03 M      329.98 ns  ±7615.81%         292 ns         417 ns
+
+Comparison: 
+EtsGraph.get        3.55 M
+EtsGraph.put        3.03 M - 1.17x slower +47.93 ns
+
+##### With input Graph {num_vertex, num_edge} = {100, 9900} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.28 M      304.52 ns  ±7962.37%         250 ns         416 ns
+EtsGraph.put        3.01 M      332.26 ns  ±7580.30%         292 ns         417 ns
+
+Comparison: 
+EtsGraph.get        3.28 M
+EtsGraph.put        3.01 M - 1.09x slower +27.74 ns
+
+##### With input Graph {num_vertex, num_edge} = {1000, 1000} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.49 M      286.93 ns  ±7817.37%         250 ns         375 ns
+EtsGraph.put        1.72 M      580.50 ns  ±2036.82%         500 ns        1000 ns
+
+Comparison: 
+EtsGraph.get        3.49 M
+EtsGraph.put        1.72 M - 2.02x slower +293.56 ns
+
+##### With input Graph {num_vertex, num_edge} = {1000, 2000} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.52 M      284.40 ns  ±7002.84%         250 ns         334 ns
+EtsGraph.put        1.72 M      582.04 ns  ±2035.18%         500 ns        1000 ns
+
+Comparison: 
+EtsGraph.get        3.52 M
+EtsGraph.put        1.72 M - 2.05x slower +297.64 ns
+
+##### With input Graph {num_vertex, num_edge} = {1000, 999000} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        1.80 M      555.79 ns  ±3066.80%         459 ns         916 ns
+EtsGraph.put        1.65 M      607.47 ns  ±3147.06%         500 ns         958 ns
+
+Comparison: 
+EtsGraph.get        1.80 M
+EtsGraph.put        1.65 M - 1.09x slower +51.68 ns
+
+##### With input Graph {num_vertex, num_edge} = {5000, 10000} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.38 M      296.05 ns  ±6770.76%         250 ns         416 ns
+EtsGraph.put        1.19 M      837.77 ns  ±1673.47%         791 ns        1458 ns
+
+Comparison: 
+EtsGraph.get        3.38 M
+EtsGraph.put        1.19 M - 2.83x slower +541.72 ns
+
+##### With input Graph {num_vertex, num_edge} = {5000, 24995000} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        1.55 M      646.50 ns  ±2911.51%         583 ns        1083 ns
+EtsGraph.put        1.43 M      697.43 ns  ±3176.21%         584 ns        1125 ns
+
+Comparison: 
+EtsGraph.get        1.55 M
+EtsGraph.put        1.43 M - 1.08x slower +50.94 ns
+
+##### With input Graph {num_vertex, num_edge} = {5000, 5000} #####
+Name                   ips        average  deviation         median         99th %
+EtsGraph.get        3.42 M      292.42 ns  ±6591.03%         250 ns         375 ns
+EtsGraph.put        1.16 M      864.43 ns  ±1659.11%         792 ns        1500 ns
+
+Comparison: 
+EtsGraph.get        3.42 M
+EtsGraph.put        1.16 M - 2.96x slower +572.01 ns
+```
+
+1. The maximum number of edges when the number of vertexes is 5,000 is 24,995,000. 
+2. The average execution time of `EtsGraph.put` in this case is 697.43 ns.
+3. Then, total execution time of `EtsGraph.put` when generating the graph in this case is 17,432 msec.
+4. Total execution time of generating the graph in this case is 22,082.453 msec. It is 1.88 times faster than that of `MapGraph`. 
+5. About 79% is the ratio of generating the graph to `EtsGraph.put`, and about 21% is some overheads. This is 1.7 times less than that of `MapGraph`.
+
 ## License
 
 Copyright (c) 2022 University of Kitakyushu
