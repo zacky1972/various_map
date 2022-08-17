@@ -58,4 +58,12 @@ defmodule VariousMap.EtsMap do
     :ets.insert(map, {key, value})
     map
   end
+
+  @doc """
+  Delete `EtsMap` named as an atom `map`.
+  """
+  @spec delete(t()) :: t()
+  def delete(map) do
+    :ets.delete(map)
+  end
 end
