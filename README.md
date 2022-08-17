@@ -109,7 +109,22 @@ Run `mix run -r bench/map_graph_bench.exs`, then you'll get results similar to t
 
 ```
 % mix run -r bench/map_graph_bench.exs
-Operating System: macOS
+time of create random_edges: 0.713msec.
+time of create random_edges: 4.481msec.
+time of create random_edges: 875.896msec.
+time of create random_edges: 33377.593msec.
+time of create MapGraph: 0.015msec
+time of create MapGraph: 0.002msec
+time of create MapGraph: 0.024msec
+time of create MapGraph: 0.043msec
+time of create MapGraph: 0.045msec
+time of create MapGraph: 3.501msec
+time of create MapGraph: 0.267msec
+time of create MapGraph: 0.58msec
+time of create MapGraph: 1186.544msec
+time of create MapGraph: 2.459msec
+time of create MapGraph: 4.098msec
+time of create MapGraph: 41416.62msec
 CPU Information: Apple M1
 Number of Available Cores: 8
 Available memory: 16 GB
@@ -122,8 +137,8 @@ time: 5 s
 memory time: 0 ns
 reduction time: 0 ns
 parallel: 1
-inputs: Graph {num_vertex, num_edge} = {10, 10}, Graph {num_vertex, num_edge} = {10, 20}, Graph {num_vertex, num_edge} = {10, 90}, Graph {num_vertex, num_edge} = {100, 100}, Graph {num_vertex, num_edge} = {100, 200}, Graph {num_vertex, num_edge} = {100, 9900}, Graph {num_vertex, num_edge} = {1000, 1000}, Graph {num_vertex, num_edge} = {1000, 2000}, Graph {num_vertex, num_edge} = {1000, 999000}
-Estimated total run time: 2.10 min
+inputs: Graph {num_vertex, num_edge} = {10, 10}, Graph {num_vertex, num_edge} = {10, 20}, Graph {num_vertex, num_edge} = {10, 90}, Graph {num_vertex, num_edge} = {100, 100}, Graph {num_vertex, num_edge} = {100, 200}, Graph {num_vertex, num_edge} = {100, 9900}, Graph {num_vertex, num_edge} = {1000, 1000}, Graph {num_vertex, num_edge} = {1000, 2000}, Graph {num_vertex, num_edge} = {1000, 999000}, Graph {num_vertex, num_edge} = {5000, 10000}, Graph {num_vertex, num_edge} = {5000, 24995000}, Graph {num_vertex, num_edge} = {5000, 5000}
+Estimated total run time: 2.80 min
 
 Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {10, 10} ...
 Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {10, 20} ...
@@ -134,97 +149,135 @@ Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {100, 9900} 
 Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {1000, 1000} ...
 Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {1000, 2000} ...
 Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {1000, 999000} ...
+Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {5000, 10000} ...
+Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {5000, 24995000} ...
+Benchmarking MapGraph.get with input Graph {num_vertex, num_edge} = {5000, 5000} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {10, 10} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {10, 20} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {10, 90} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {100, 100} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {100, 200} ...
-...
+Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {100, 9900} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {1000, 1000} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {1000, 2000} ...
 Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {1000, 999000} ...
+Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {5000, 10000} ...
+000} ...
+Benchmarking MapGraph.put with input Graph {num_vertex, num_edge} = {5000, 5000} ...
 
 ##### With input Graph {num_vertex, num_edge} = {10, 10} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        4.69 M      213.36 ns ±17504.20%         166 ns         208 ns
-MapGraph.put        3.54 M      282.82 ns  ±9489.69%         209 ns         458 ns
+MapGraph.put        3.17 M      315.56 ns ±13718.13%         209 ns         458 ns
+MapGraph.get        2.81 M      356.22 ns ±67762.37%         125 ns         209 ns
 
 Comparison: 
-MapGraph.get        4.69 M
-MapGraph.put        3.54 M - 1.33x slower +69.46 ns
+MapGraph.put        3.17 M
+MapGraph.get        2.81 M - 1.13x slower +40.67 ns
 
-##### With input Graph {num_vertex, num_edge} = {10, 20} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        4.65 M      215.15 ns ±17295.97%         166 ns         208 ns
-MapGraph.put        3.19 M      313.36 ns ±11864.01%         250 ns         417 ns
+MapGraph.put        2.10 M      476.66 ns ±30115.64%         209 ns         459 ns
+MapGraph.get        1.98 M      505.90 ns ±45785.93%         166 ns         333 ns
 
 Comparison: 
-MapGraph.get        4.65 M
-MapGraph.put        3.19 M - 1.46x slower +98.21 ns
+MapGraph.put        2.10 M
+MapGraph.get        1.98 M - 1.06x slower +29.23 ns
 
 ##### With input Graph {num_vertex, num_edge} = {10, 90} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        4.57 M      218.86 ns ±15099.28%         167 ns         209 ns
-MapGraph.put        2.94 M      339.90 ns  ±9856.49%         250 ns         458 ns
+MapGraph.get        4.18 M      239.30 ns ±61742.01%         166 ns         209 ns
+MapGraph.put        1.94 M      514.48 ns ±27373.87%         250 ns         500 ns
 
 Comparison: 
-MapGraph.get        4.57 M
-MapGraph.put        2.94 M - 1.55x slower +121.04 ns
+MapGraph.get        4.18 M
+MapGraph.put        1.94 M - 2.15x slower +275.17 ns
 
 ##### With input Graph {num_vertex, num_edge} = {100, 100} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        4.48 M      223.37 ns ±10550.96%         167 ns         250 ns
-MapGraph.put        2.62 M      381.93 ns  ±4544.48%         292 ns         500 ns
+MapGraph.get        2.35 M      425.52 ns ±57255.76%         167 ns         250 ns
+MapGraph.put        2.07 M      483.08 ns ±18686.34%         292 ns         500 ns
 
 Comparison: 
-MapGraph.get        4.48 M
-MapGraph.put        2.62 M - 1.71x slower +158.56 ns
+MapGraph.get        2.35 M
+MapGraph.put        2.07 M - 1.14x slower +57.56 ns
 
 ##### With input Graph {num_vertex, num_edge} = {100, 200} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        4.06 M      246.37 ns ±12658.92%         167 ns         250 ns
-MapGraph.put        2.48 M      402.82 ns  ±7154.28%         333 ns         584 ns
+MapGraph.get        4.98 M      200.88 ns ±18824.61%         167 ns         250 ns
+MapGraph.put        2.47 M      404.76 ns ±14900.37%         292 ns         542 ns
 
 Comparison: 
-MapGraph.get        4.06 M
-MapGraph.put        2.48 M - 1.64x slower +156.45 ns
+MapGraph.get        4.98 M
+MapGraph.put        2.47 M - 2.01x slower +203.88 ns
 
 ##### With input Graph {num_vertex, num_edge} = {100, 9900} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        3.37 M      296.70 ns ±13766.84%         209 ns         334 ns
-MapGraph.put        2.42 M      413.59 ns  ±3309.08%         375 ns         583 ns
+MapGraph.get        3.68 M      271.89 ns ±46822.54%         208 ns         333 ns
+MapGraph.put        1.82 M      548.31 ns ±28400.13%         375 ns         583 ns
 
 Comparison: 
-MapGraph.get        3.37 M
-MapGraph.put        2.42 M - 1.39x slower +116.90 ns
+MapGraph.get        3.68 M
+MapGraph.put        1.82 M - 2.02x slower +276.42 ns
 
 ##### With input Graph {num_vertex, num_edge} = {1000, 1000} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        3.72 M      268.89 ns ±14565.16%         208 ns         291 ns
-MapGraph.put        2.41 M      415.65 ns  ±6649.29%         375 ns         583 ns
+MapGraph.get        5.13 M      195.08 ns    ±77.37%         208 ns         250 ns
+MapGraph.put        1.98 M      504.94 ns ±15354.97%         334 ns         583 ns
 
 Comparison: 
-MapGraph.get        3.72 M
-MapGraph.put        2.41 M - 1.55x slower +146.76 ns
+MapGraph.get        5.13 M
+MapGraph.put        1.98 M - 2.59x slower +309.86 ns
 
 ##### With input Graph {num_vertex, num_edge} = {1000, 2000} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        3.75 M      266.67 ns ±11280.61%         208 ns         292 ns
-MapGraph.put        2.36 M      424.20 ns  ±5360.74%         375 ns         584 ns
+MapGraph.get        3.28 M      304.74 ns ±49168.98%         208 ns         292 ns
+MapGraph.put        2.01 M      497.33 ns ±14571.29%         375 ns         583 ns
 
 Comparison: 
-MapGraph.get        3.75 M
-MapGraph.put        2.36 M - 1.59x slower +157.53 ns
+MapGraph.get        3.28 M
+MapGraph.put        2.01 M - 1.63x slower +192.59 ns
 
 ##### With input Graph {num_vertex, num_edge} = {1000, 999000} #####
 Name                   ips        average  deviation         median         99th %
-MapGraph.get        1.69 M      593.16 ns  ±3253.38%         541 ns        1042 ns
-MapGraph.put        1.34 M      744.81 ns  ±1271.50%         667 ns        1167 ns
+MapGraph.put        1.25 M      801.65 ns  ±7891.48%         667 ns        2082 ns
+MapGraph.get        1.14 M      875.55 ns ±26599.03%         500 ns        1167 ns
 
 Comparison: 
-MapGraph.get        1.69 M
-MapGraph.put        1.34 M - 1.26x slower +151.65 ns
+MapGraph.put        1.25 M
+MapGraph.get        1.14 M - 1.09x slower +73.90 ns
+
+##### With input Graph {num_vertex, num_edge} = {5000, 10000} #####
+Name                   ips        average  deviation         median         99th %
+MapGraph.get        3.34 M      299.15 ns ±47074.16%         209 ns         375 ns
+MapGraph.put        1.77 M      564.49 ns ±26043.86%         416 ns        1916 ns
+
+Comparison: 
+MapGraph.get        3.34 M
+MapGraph.put        1.77 M - 1.89x slower +265.34 ns
+
+##### With input Graph {num_vertex, num_edge} = {5000, 24995000} #####
+Name                   ips        average  deviation         median         99th %
+MapGraph.put      944.44 K        1.06 μs  ±5250.09%        0.96 μs        2.38 μs
+MapGraph.get      475.36 K        2.10 μs ±49703.62%        1.29 μs        2.75 μs
+
+Comparison: 
+MapGraph.put      944.44 K
+MapGraph.get      475.36 K - 1.99x slower +1.04 μs
+
+##### With input Graph {num_vertex, num_edge} = {5000, 5000} #####
+Name                   ips        average  deviation         median         99th %
+MapGraph.get        3.25 M      307.38 ns ±50333.48%         208 ns         333 ns
+MapGraph.put        1.78 M      561.28 ns ±23872.27%         375 ns         667 ns
+
+Comparison: 
+MapGraph.get        3.25 M
+MapGraph.put        1.78 M - 1.83x slower +253.89 ns
 ```
+
+1. The maximum number of edges when the number of vertexes is 5,000 is 24,995,000. 
+2. The average execution time of `MapGraph.put` in this case is 1.06 μs.
+3. Then, total execution time of `MapGraph.put` when generating the graph in this case is 26,496.7 msec.
+4. But, total execution time of generating the graph in this case is 41,416.62 msec.
+5. About 64% is the ratio of generating the graph to `MapGraph.put`, and about 36% is some overheads. What does the overheads arise from?
 
 ## License
 
