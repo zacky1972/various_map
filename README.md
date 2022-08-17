@@ -100,7 +100,7 @@ The operations of `Map.get/3` and `Map.put/3` work in logarithmic time, which me
 
 The results show the growth of the execution time of the operations seems to be very gentle, even considering that they work in logarithmic time.
 
-## MapGraph and Benchmark of it
+### MapGraph and Benchmark of it
 
 `VariousMap.MapGraph` is a module for a graph that can use for both a directed and a undirected graph using `Map`.
 
