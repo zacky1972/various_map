@@ -31,7 +31,7 @@ defmodule VariousMap.EtsGraph do
   def init(graph, v_size) do
     init()
 
-    :ets.new(get_graph_atom(graph), [:set, :protected, :named_table])
+    :ets.new(get_graph_atom(graph), [:set, :public, :named_table])
     :ets.insert(@global_ets, {graph, v_size})
     graph
   end
