@@ -101,7 +101,7 @@ The operations of `Map.get/3` and `Map.put/3` work in logarithmic time, which me
 
 The results show the growth of the execution time of the operations seems to be very gentle, even considering that they work in logarithmic time.
 
-Map is 12.1-18.2x and 77.4-119x faster than EtsMap and MnesiaMap, respectively.
+`Map` is 12.1-18.2x and 77.4-119x faster than `VariousMap.EtsMap` and `VariousMap.MnesiaMap`, respectively.
 
 ### EtsMap and Benchmark of it
 
@@ -185,8 +185,8 @@ ETS Map put      566.85 K
 ETS Map get      447.76 K - 1.27x slower +0.47 μs
 ```
 
-EtsMap is 12.1-18.2x slower than Map.
-EtsMap is 6.40-6.51x faster than MnesiaMap.
+`VariousMap.EtsMap` is 12.1-18.2x slower than `Map`.
+`VariousMap.EtsMap` is 6.40-6.51x faster than `VariousMap.MnesiaMap`.
 
 ### MnesiaMap and Benchmark of it
 
@@ -269,7 +269,7 @@ Mnesia Map put       88.56 K
 Mnesia Map get       68.77 K - 1.29x slower +3.25 μs
 ```
 
-MnesiaMap is 77.4-119x and 6.40-6.51x slower than Map and EtsMap, respectively.
+`VariousMap.MnesiaMap` is 77.4-119x and 6.40-6.51x slower than `Map` and `VariousMap.EtsMap`, respectively.
 
 
 ### MapGraph and Benchmark of it
