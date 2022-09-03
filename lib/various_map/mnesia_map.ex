@@ -27,7 +27,7 @@ defmodule VariousMap.MnesiaMap do
   """
   @spec init(t()) :: t()
   def init(map) do
-    case Mnesia.create_table(map, [attributes: [:key, :value]]) do
+    case Mnesia.create_table(map, attributes: [:key, :value]) do
       {:atomic, :ok} -> map
       {:aborted, {:already_exists, ^map}} -> map
       other -> raise RuntimeError, "reason: #{inspect(other)}"
