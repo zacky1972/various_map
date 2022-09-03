@@ -8,8 +8,8 @@ defmodule RandomEtsGraph do
     |> Enum.shuffle()
   end
 
-  def generate(graph, edges, e_size) do
-    init(graph)
+  def generate(graph, edges, v_size, e_size) do
+    init(graph, v_size)
 
     edges
     |> Enum.take(e_size)
@@ -41,7 +41,7 @@ inputs =
     [v_size, v_size * 2, RandomEtsGraph.max_edges(v_size)]
     |> Enum.map(fn e_size ->
       graph = :"graph_#{v_size}_#{e_size}"
-      {time, _result} = :timer.tc(fn -> RandomEtsGraph.generate(graph, edges, e_size) end)
+      {time, _result} = :timer.tc(fn -> RandomEtsGraph.generate(graph, edges, v_size, e_size) end)
       IO.puts("time of create EtsGraph: #{time / 1000}msec")
 
       {
