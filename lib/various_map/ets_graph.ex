@@ -1,6 +1,6 @@
 defmodule VariousMap.EtsGraph do
   @moduledoc """
-
+  Global directed graph structure using ETS.
   """
 
   @prefix "ets_graph"
