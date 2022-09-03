@@ -43,11 +43,11 @@ defmodule VariousMap.MnesiaMap do
 
   ## Examples
 
-      iex> map = :map
+      iex> map = :mnesia_map
       iex> VariousMap.MnesiaMap.init(map)
-      :map
+      :mnesia_map
       iex> VariousMap.MnesiaMap.put(map, 1, "a")
-      :map
+      :mnesia_map
       iex> VariousMap.MnesiaMap.get(map, 1)
       "a"
       iex> VariousMap.MnesiaMap.get(map, 2)
@@ -57,6 +57,13 @@ defmodule VariousMap.MnesiaMap do
   """
   @spec get(t(), Map.key(), Map.value()) :: Map.value()
   def get(map, key, default \\ nil) do
+    Mnesia.transaction(fn ->
+      Mnesia.read({map, key})
+    end)
+    |> case do
+      {:atomic, [{^map, ^key, value}]} -> value
+      {:atomic, []} -> default
+    end
   end
 
   @doc """
@@ -64,14 +71,19 @@ defmodule VariousMap.MnesiaMap do
 
   ## Examples
 
-      iex> map = :map
+      iex> map = :mnesia_map
       iex> VariousMap.MnesiaMap.init(map)
-      :map
+      :mnesia_map
       iex> VariousMap.MnesiaMap.put(map, 1, "a")
-      :map
+      :mnesia_map
   """
   @spec put(t(), Map.key(), Map.value()) :: t()
   def put(map, key, value) do
+    Mnesia.transaction(fn ->
+      Mnesia.write({map, key, value})
+    end)
+
+    map
   end
 
   @doc """
