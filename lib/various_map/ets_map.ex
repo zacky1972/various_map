@@ -3,6 +3,8 @@ defmodule VariousMap.EtsMap do
   A global map using ETS.
   """
 
+  alias :ets, as: Ets
+
   @type t() :: atom()
 
   @doc """
@@ -10,7 +12,7 @@ defmodule VariousMap.EtsMap do
   """
   @spec init(t()) :: t()
   def init(map) do
-    :ets.new(map, [:set, :protected, :named_table])
+    Ets.new(map, [:set, :protected, :named_table])
   end
 
   @doc """
@@ -36,7 +38,7 @@ defmodule VariousMap.EtsMap do
   """
   @spec get(t(), Map.key(), Map.value()) :: Map.value()
   def get(map, key, default \\ nil) do
-    case :ets.lookup(map, key) do
+    case Ets.lookup(map, key) do
       [] -> default
       [{^key, value}] -> value
     end
@@ -55,7 +57,7 @@ defmodule VariousMap.EtsMap do
   """
   @spec put(t(), Map.key(), Map.value()) :: t()
   def put(map, key, value) do
-    :ets.insert(map, {key, value})
+    Ets.insert(map, {key, value})
     map
   end
 
@@ -64,6 +66,6 @@ defmodule VariousMap.EtsMap do
   """
   @spec delete(t()) :: t()
   def delete(map) do
-    :ets.delete(map)
+    Ets.delete(map)
   end
 end

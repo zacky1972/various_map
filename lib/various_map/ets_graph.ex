@@ -3,6 +3,8 @@ defmodule VariousMap.EtsGraph do
 
   """
 
+  alias :ets, as: Ets
+
   @prefix "ets_graph"
   @global_ets :ets_g_global
   @type t() :: atom()
@@ -16,7 +18,7 @@ defmodule VariousMap.EtsGraph do
   @spec init() :: :ok
   def init() do
     try do
-      :ets.new(@global_ets, [:set, :public, :named_table])
+      Ets.new(@global_ets, [:set, :public, :named_table])
     rescue
       ArgumentError -> :ok
     end
@@ -31,8 +33,8 @@ defmodule VariousMap.EtsGraph do
   def init(graph, v_size) do
     init()
 
-    :ets.new(get_graph_atom(graph), [:set, :public, :named_table])
-    :ets.insert(@global_ets, {graph, v_size})
+    Ets.new(get_graph_atom(graph), [:set, :public, :named_table])
+    Ets.insert(@global_ets, {graph, v_size})
     graph
   end
 
@@ -41,7 +43,7 @@ defmodule VariousMap.EtsGraph do
   """
   @spec delete(t()) :: t()
   def delete(graph) do
-    :ets.delete(graph)
+    Ets.delete(graph)
   end
 
   defp get_graph_atom(graph) do
@@ -49,7 +51,7 @@ defmodule VariousMap.EtsGraph do
   end
 
   defp get_graph_size(graph) do
-    case :ets.lookup(@global_ets, graph) do
+    case Ets.lookup(@global_ets, graph) do
       [] -> raise ArgumentError, "Graph #{graph} is not initialized."
       [{^graph, v_size}] -> v_size
     end
@@ -94,7 +96,7 @@ defmodule VariousMap.EtsGraph do
     graph_atom = get_graph_atom(graph)
     index = get_index(v_size, vertex1, vertex2)
 
-    case :ets.lookup(graph_atom, index) do
+    case Ets.lookup(graph_atom, index) do
       [] -> default
       [{^index, value}] -> value
     end
@@ -124,7 +126,7 @@ defmodule VariousMap.EtsGraph do
 
     graph_atom = get_graph_atom(graph)
     index = get_index(v_size, vertex1, vertex2)
-    :ets.insert(graph_atom, {index, value})
+    Ets.insert(graph_atom, {index, value})
     graph
   end
 
@@ -154,7 +156,7 @@ defmodule VariousMap.EtsGraph do
     index_min = get_index(v_size, vertex, 1)
     index_max = index_min + v_size
 
-    :ets.select(graph_atom, [
+    Ets.select(graph_atom, [
       {{:"$1", :"$2"}, [{:andalso, {:"=<", index_min, :"$1"}, {:"=<", :"$1", index_max}}],
        [:"$_"]}
     ])
