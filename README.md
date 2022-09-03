@@ -361,6 +361,8 @@ ETS Map put      566.85 K
 ETS Map get      447.76 K - 1.27x slower +0.47 μs
 ```
 
+EtsMap is 6.40-6.51x faster than MnesiaMap.
+
 ### MnesiaMap and Benchmark of it
 
 `VariousMap.MnesiaMap` is a module compatible to `Map` but using Mnesia.
@@ -441,6 +443,8 @@ Comparison:
 Mnesia Map put       88.56 K
 Mnesia Map get       68.77 K - 1.29x slower +3.25 μs
 ```
+
+MnesiaMap is 6.40-6.51x slower than EtsMap.
 
 
 ### EtsGraph and Benchmark of it
