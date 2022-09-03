@@ -32,5 +32,6 @@ Benchee.run(
     end
   },
   before_each: fn input -> {input, Enum.count(input)} end,
-  inputs: inputs
+  inputs: inputs,
+  print: [fast_warning: false]
 )
