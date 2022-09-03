@@ -100,6 +100,174 @@ The operations of `Map.get/3` and `Map.put/3` work in logarithmic time, which me
 
 The results show the growth of the execution time of the operations seems to be very gentle, even considering that they work in logarithmic time.
 
+### EtsMap and Benchmark of it
+
+`VariousMap.EtsMap` is a module compatible to `Map` but using ETS.
+
+
+Run `mix run -r bench/ets_map_bench.exs`, then you'll get results similar to the following:
+
+```
+% mix run -r bench/ets_map_bench.exs
+Operating System: macOS
+CPU Information: Apple M2
+Number of Available Cores: 8
+Available memory: 24 GB
+Elixir 1.14.0
+Erlang 25.0.4
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+reduction time: 0 ns
+parallel: 1
+inputs: size 10, size 100, size 1000, size 10000, size 100000
+Estimated total run time: 1.17 min
+
+Benchmarking ETS Map get with input size 10 ...
+Benchmarking ETS Map get with input size 100 ...
+Benchmarking ETS Map get with input size 1000 ...
+Benchmarking ETS Map get with input size 10000 ...
+Benchmarking ETS Map get with input size 100000 ...
+Benchmarking ETS Map put with input size 10 ...
+Benchmarking ETS Map put with input size 100 ...
+Benchmarking ETS Map put with input size 1000 ...
+Benchmarking ETS Map put with input size 10000 ...
+Benchmarking ETS Map put with input size 100000 ...
+
+##### With input size 10 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map get      367.06 K        2.72 μs    ±11.40%        2.67 μs        3.49 μs
+ETS Map put      358.20 K        2.79 μs    ±10.34%        2.75 μs        3.63 μs
+
+Comparison: 
+ETS Map get      367.06 K
+ETS Map put      358.20 K - 1.02x slower +0.0674 μs
+
+##### With input size 100 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map get       10.11 M      0.0989 μs    ±37.50%      0.0840 μs       0.125 μs
+ETS Map put      0.0415 M       24.11 μs     ±3.89%       23.80 μs       26.77 μs
+
+Comparison: 
+ETS Map get       10.11 M
+ETS Map put      0.0415 M - 243.84x slower +24.01 μs
+
+##### With input size 1000 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map get        2.92 K      342.08 μs     ±1.93%      341.70 μs      357.35 μs
+ETS Map put        2.91 K      343.56 μs     ±2.44%      341.52 μs      367.19 μs
+
+Comparison: 
+ETS Map get        2.92 K
+ETS Map put        2.91 K - 1.00x slower +1.48 μs
+
+##### With input size 10000 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map get        260.82        3.83 ms     ±4.39%        3.82 ms        5.15 ms
+ETS Map put        258.13        3.87 ms     ±1.33%        3.88 ms        4.02 ms
+
+Comparison: 
+ETS Map get        260.82
+ETS Map put        258.13 - 1.01x slower +0.0399 ms
+
+##### With input size 100000 #####
+Name                  ips        average  deviation         median         99th %
+ETS Map put      566.85 K        1.76 μs    ±82.06%        0.71 μs        5.14 μs
+ETS Map get      447.76 K        2.23 μs    ±63.62%        2.50 μs        5.19 μs
+
+Comparison: 
+ETS Map put      566.85 K
+ETS Map get      447.76 K - 1.27x slower +0.47 μs
+```
+
+EtsMap is 6.40-6.51x faster than MnesiaMap.
+
+### MnesiaMap and Benchmark of it
+
+`VariousMap.MnesiaMap` is a module compatible to `Map` but using Mnesia.
+
+Run `mix run -r bench/mnesia_map_bench.exs`, then you'll get results similar to the following:
+
+```
+ % mix run -r bench/mnesia_map_bench.exs
+Operating System: macOS
+CPU Information: Apple M2
+Number of Available Cores: 8
+Available memory: 24 GB
+Elixir 1.14.0
+Erlang 25.0.4
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+reduction time: 0 ns
+parallel: 1
+inputs: size 10, size 100, size 1000, size 10000, size 100000
+Estimated total run time: 1.17 min
+
+Benchmarking Mnesia Map get with input size 10 ...
+Benchmarking Mnesia Map get with input size 100 ...
+Benchmarking Mnesia Map get with input size 1000 ...
+Benchmarking Mnesia Map get with input size 10000 ...
+Benchmarking Mnesia Map get with input size 100000 ...
+Benchmarking Mnesia Map put with input size 10 ...
+Benchmarking Mnesia Map put with input size 100 ...
+Benchmarking Mnesia Map put with input size 1000 ...
+Benchmarking Mnesia Map put with input size 10000 ...
+Benchmarking Mnesia Map put with input size 100000 ...
+
+##### With input size 10 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       91.70 K       10.90 μs    ±13.83%       10.67 μs       18.70 μs
+Mnesia Map get       90.34 K       11.07 μs    ±13.04%       10.83 μs       18.11 μs
+
+Comparison: 
+Mnesia Map put       91.70 K
+Mnesia Map get       90.34 K - 1.02x slower +0.165 μs
+
+##### With input size 100 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       88.46 K       11.30 μs    ±26.82%        9.88 μs       21.53 μs
+Mnesia Map get       86.74 K       11.53 μs    ±27.53%       10.50 μs       22.88 μs
+
+Comparison: 
+Mnesia Map put       88.46 K
+Mnesia Map get       86.74 K - 1.02x slower +0.22 μs
+
+##### With input size 1000 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       96.27 K       10.39 μs    ±19.80%        9.75 μs       19.92 μs
+Mnesia Map get       91.63 K       10.91 μs    ±15.61%       10.17 μs       17.70 μs
+
+Comparison: 
+Mnesia Map put       96.27 K
+Mnesia Map get       91.63 K - 1.05x slower +0.53 μs
+
+##### With input size 10000 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put      104.36 K        9.58 μs    ±37.39%        8.46 μs       29.58 μs
+Mnesia Map get       95.75 K       10.44 μs    ±26.64%        9.52 μs       25.75 μs
+
+Comparison: 
+Mnesia Map put      104.36 K
+Mnesia Map get       95.75 K - 1.09x slower +0.86 μs
+
+##### With input size 100000 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       88.56 K       11.29 μs    ±23.40%       10.29 μs          16 μs
+Mnesia Map get       68.77 K       14.54 μs    ±10.44%       14.96 μs       15.96 μs
+
+Comparison: 
+Mnesia Map put       88.56 K
+Mnesia Map get       68.77 K - 1.29x slower +3.25 μs
+```
+
+MnesiaMap is 6.40-6.51x slower than EtsMap.
+
+
 ### MapGraph and Benchmark of it
 
 `VariousMap.MapGraph` is a module for a graph that can use for both a directed and a undirected graph using `Map`.
@@ -278,174 +446,6 @@ MapGraph.put        1.78 M - 1.83x slower +253.89 ns
 3. Then, total execution time of `MapGraph.put` when generating the graph in this case is 26,496.7 msec.
 4. But, total execution time of generating the graph in this case is 41,416.62 msec.
 5. About 64% is the ratio of generating the graph to `MapGraph.put`, and about 36% is some overheads. What does the overheads arise from?
-
-### EtsMap and Benchmark of it
-
-`VariousMap.EtsMap` is a module compatible to `Map` but using ETS.
-
-
-Run `mix run -r bench/ets_map_bench.exs`, then you'll get results similar to the following:
-
-```
-% mix run -r bench/ets_map_bench.exs
-Operating System: macOS
-CPU Information: Apple M2
-Number of Available Cores: 8
-Available memory: 24 GB
-Elixir 1.14.0
-Erlang 25.0.4
-
-Benchmark suite executing with the following configuration:
-warmup: 2 s
-time: 5 s
-memory time: 0 ns
-reduction time: 0 ns
-parallel: 1
-inputs: size 10, size 100, size 1000, size 10000, size 100000
-Estimated total run time: 1.17 min
-
-Benchmarking ETS Map get with input size 10 ...
-Benchmarking ETS Map get with input size 100 ...
-Benchmarking ETS Map get with input size 1000 ...
-Benchmarking ETS Map get with input size 10000 ...
-Benchmarking ETS Map get with input size 100000 ...
-Benchmarking ETS Map put with input size 10 ...
-Benchmarking ETS Map put with input size 100 ...
-Benchmarking ETS Map put with input size 1000 ...
-Benchmarking ETS Map put with input size 10000 ...
-Benchmarking ETS Map put with input size 100000 ...
-
-##### With input size 10 #####
-Name                  ips        average  deviation         median         99th %
-ETS Map get      367.06 K        2.72 μs    ±11.40%        2.67 μs        3.49 μs
-ETS Map put      358.20 K        2.79 μs    ±10.34%        2.75 μs        3.63 μs
-
-Comparison: 
-ETS Map get      367.06 K
-ETS Map put      358.20 K - 1.02x slower +0.0674 μs
-
-##### With input size 100 #####
-Name                  ips        average  deviation         median         99th %
-ETS Map get       10.11 M      0.0989 μs    ±37.50%      0.0840 μs       0.125 μs
-ETS Map put      0.0415 M       24.11 μs     ±3.89%       23.80 μs       26.77 μs
-
-Comparison: 
-ETS Map get       10.11 M
-ETS Map put      0.0415 M - 243.84x slower +24.01 μs
-
-##### With input size 1000 #####
-Name                  ips        average  deviation         median         99th %
-ETS Map get        2.92 K      342.08 μs     ±1.93%      341.70 μs      357.35 μs
-ETS Map put        2.91 K      343.56 μs     ±2.44%      341.52 μs      367.19 μs
-
-Comparison: 
-ETS Map get        2.92 K
-ETS Map put        2.91 K - 1.00x slower +1.48 μs
-
-##### With input size 10000 #####
-Name                  ips        average  deviation         median         99th %
-ETS Map get        260.82        3.83 ms     ±4.39%        3.82 ms        5.15 ms
-ETS Map put        258.13        3.87 ms     ±1.33%        3.88 ms        4.02 ms
-
-Comparison: 
-ETS Map get        260.82
-ETS Map put        258.13 - 1.01x slower +0.0399 ms
-
-##### With input size 100000 #####
-Name                  ips        average  deviation         median         99th %
-ETS Map put      566.85 K        1.76 μs    ±82.06%        0.71 μs        5.14 μs
-ETS Map get      447.76 K        2.23 μs    ±63.62%        2.50 μs        5.19 μs
-
-Comparison: 
-ETS Map put      566.85 K
-ETS Map get      447.76 K - 1.27x slower +0.47 μs
-```
-
-EtsMap is 6.40-6.51x faster than MnesiaMap.
-
-### MnesiaMap and Benchmark of it
-
-`VariousMap.MnesiaMap` is a module compatible to `Map` but using Mnesia.
-
-Run `mix run -r bench/mnesia_map_bench.exs`, then you'll get results similar to the following:
-
-```
- % mix run -r bench/mnesia_map_bench.exs
-Operating System: macOS
-CPU Information: Apple M2
-Number of Available Cores: 8
-Available memory: 24 GB
-Elixir 1.14.0
-Erlang 25.0.4
-
-Benchmark suite executing with the following configuration:
-warmup: 2 s
-time: 5 s
-memory time: 0 ns
-reduction time: 0 ns
-parallel: 1
-inputs: size 10, size 100, size 1000, size 10000, size 100000
-Estimated total run time: 1.17 min
-
-Benchmarking Mnesia Map get with input size 10 ...
-Benchmarking Mnesia Map get with input size 100 ...
-Benchmarking Mnesia Map get with input size 1000 ...
-Benchmarking Mnesia Map get with input size 10000 ...
-Benchmarking Mnesia Map get with input size 100000 ...
-Benchmarking Mnesia Map put with input size 10 ...
-Benchmarking Mnesia Map put with input size 100 ...
-Benchmarking Mnesia Map put with input size 1000 ...
-Benchmarking Mnesia Map put with input size 10000 ...
-Benchmarking Mnesia Map put with input size 100000 ...
-
-##### With input size 10 #####
-Name                     ips        average  deviation         median         99th %
-Mnesia Map put       91.70 K       10.90 μs    ±13.83%       10.67 μs       18.70 μs
-Mnesia Map get       90.34 K       11.07 μs    ±13.04%       10.83 μs       18.11 μs
-
-Comparison: 
-Mnesia Map put       91.70 K
-Mnesia Map get       90.34 K - 1.02x slower +0.165 μs
-
-##### With input size 100 #####
-Name                     ips        average  deviation         median         99th %
-Mnesia Map put       88.46 K       11.30 μs    ±26.82%        9.88 μs       21.53 μs
-Mnesia Map get       86.74 K       11.53 μs    ±27.53%       10.50 μs       22.88 μs
-
-Comparison: 
-Mnesia Map put       88.46 K
-Mnesia Map get       86.74 K - 1.02x slower +0.22 μs
-
-##### With input size 1000 #####
-Name                     ips        average  deviation         median         99th %
-Mnesia Map put       96.27 K       10.39 μs    ±19.80%        9.75 μs       19.92 μs
-Mnesia Map get       91.63 K       10.91 μs    ±15.61%       10.17 μs       17.70 μs
-
-Comparison: 
-Mnesia Map put       96.27 K
-Mnesia Map get       91.63 K - 1.05x slower +0.53 μs
-
-##### With input size 10000 #####
-Name                     ips        average  deviation         median         99th %
-Mnesia Map put      104.36 K        9.58 μs    ±37.39%        8.46 μs       29.58 μs
-Mnesia Map get       95.75 K       10.44 μs    ±26.64%        9.52 μs       25.75 μs
-
-Comparison: 
-Mnesia Map put      104.36 K
-Mnesia Map get       95.75 K - 1.09x slower +0.86 μs
-
-##### With input size 100000 #####
-Name                     ips        average  deviation         median         99th %
-Mnesia Map put       88.56 K       11.29 μs    ±23.40%       10.29 μs          16 μs
-Mnesia Map get       68.77 K       14.54 μs    ±10.44%       14.96 μs       15.96 μs
-
-Comparison: 
-Mnesia Map put       88.56 K
-Mnesia Map get       68.77 K - 1.29x slower +3.25 μs
-```
-
-MnesiaMap is 6.40-6.51x slower than EtsMap.
-
 
 ### EtsGraph and Benchmark of it
 
