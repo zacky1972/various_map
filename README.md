@@ -362,6 +362,88 @@ ETS Map put      435.91 K
 ETS Map get      311.11 K - 1.40x slower +0.92 μs
 ```
 
+### MnesiaMap and Benchmark of it
+
+`VariousMap.MnesiaMap` is a module compatible to `Map` but using Mnesia.
+
+Run `mix run -r bench/mnesia_map_bench.exs`, then you'll get results similar to the following:
+
+```
+ % mix run -r bench/mnesia_map_bench.exs
+Operating System: macOS
+CPU Information: Apple M2
+Number of Available Cores: 8
+Available memory: 24 GB
+Elixir 1.14.0
+Erlang 25.0.4
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+reduction time: 0 ns
+parallel: 1
+inputs: size 10, size 100, size 1000, size 10000, size 100000
+Estimated total run time: 1.17 min
+
+Benchmarking Mnesia Map get with input size 10 ...
+Benchmarking Mnesia Map get with input size 100 ...
+Benchmarking Mnesia Map get with input size 1000 ...
+Benchmarking Mnesia Map get with input size 10000 ...
+Benchmarking Mnesia Map get with input size 100000 ...
+Benchmarking Mnesia Map put with input size 10 ...
+Benchmarking Mnesia Map put with input size 100 ...
+Benchmarking Mnesia Map put with input size 1000 ...
+Benchmarking Mnesia Map put with input size 10000 ...
+Benchmarking Mnesia Map put with input size 100000 ...
+
+##### With input size 10 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       91.70 K       10.90 μs    ±13.83%       10.67 μs       18.70 μs
+Mnesia Map get       90.34 K       11.07 μs    ±13.04%       10.83 μs       18.11 μs
+
+Comparison: 
+Mnesia Map put       91.70 K
+Mnesia Map get       90.34 K - 1.02x slower +0.165 μs
+
+##### With input size 100 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       88.46 K       11.30 μs    ±26.82%        9.88 μs       21.53 μs
+Mnesia Map get       86.74 K       11.53 μs    ±27.53%       10.50 μs       22.88 μs
+
+Comparison: 
+Mnesia Map put       88.46 K
+Mnesia Map get       86.74 K - 1.02x slower +0.22 μs
+
+##### With input size 1000 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       96.27 K       10.39 μs    ±19.80%        9.75 μs       19.92 μs
+Mnesia Map get       91.63 K       10.91 μs    ±15.61%       10.17 μs       17.70 μs
+
+Comparison: 
+Mnesia Map put       96.27 K
+Mnesia Map get       91.63 K - 1.05x slower +0.53 μs
+
+##### With input size 10000 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put      104.36 K        9.58 μs    ±37.39%        8.46 μs       29.58 μs
+Mnesia Map get       95.75 K       10.44 μs    ±26.64%        9.52 μs       25.75 μs
+
+Comparison: 
+Mnesia Map put      104.36 K
+Mnesia Map get       95.75 K - 1.09x slower +0.86 μs
+
+##### With input size 100000 #####
+Name                     ips        average  deviation         median         99th %
+Mnesia Map put       88.56 K       11.29 μs    ±23.40%       10.29 μs          16 μs
+Mnesia Map get       68.77 K       14.54 μs    ±10.44%       14.96 μs       15.96 μs
+
+Comparison: 
+Mnesia Map put       88.56 K
+Mnesia Map get       68.77 K - 1.29x slower +3.25 μs
+```
+
+
 ### EtsGraph and Benchmark of it
 
 `VariousMap.EtsGraph` is a module for a global graph that can use for a directed graph using ETS.
