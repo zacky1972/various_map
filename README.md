@@ -23,12 +23,13 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 Run `mix run -r bench/map_bench.exs`, then you'll get results similar to the following:
 
 ```
+% mix run -r bench/map_bench.exs
 Operating System: macOS
-CPU Information: Apple M1
+CPU Information: Apple M2
 Number of Available Cores: 8
-Available memory: 16 GB
-Elixir 1.14.0-rc.1
-Erlang 25.0.3
+Available memory: 24 GB
+Elixir 1.14.0
+Erlang 25.0.4
 
 Benchmark suite executing with the following configuration:
 warmup: 2 s
@@ -52,48 +53,48 @@ Benchmarking Map put with input size 100000 ...
 
 ##### With input size 10 #####
 Name              ips        average  deviation         median         99th %
-Map get        6.70 M      149.32 ns ±14716.28%         125 ns         125 ns
-Map put        5.09 M      196.29 ns ±14034.11%         125 ns         167 ns
+Map get       13.88 M       72.05 ns ±21396.29%          42 ns          84 ns
+Map put        6.98 M      143.27 ns  ±2200.77%      120.90 ns      162.50 ns
 
 Comparison: 
-Map get        6.70 M
-Map put        5.09 M - 1.31x slower +46.97 ns
+Map get       13.88 M
+Map put        6.98 M - 1.99x slower +71.22 ns
 
 ##### With input size 100 #####
 Name              ips        average  deviation         median         99th %
-Map get        5.40 M      185.12 ns ±16586.92%         125 ns         208 ns
-Map put        4.87 M      205.28 ns ±18602.38%         125 ns         167 ns
+Map get       11.14 M       89.78 ns ±15571.08%          83 ns         125 ns
+Map put        8.60 M      116.29 ns ±20030.50%          83 ns         125 ns
 
 Comparison: 
-Map get        5.40 M
-Map put        4.87 M - 1.11x slower +20.16 ns
+Map get       11.14 M
+Map put        8.60 M - 1.30x slower +26.51 ns
 
 ##### With input size 1000 #####
 Name              ips        average  deviation         median         99th %
-Map get        5.16 M      193.84 ns ±17967.19%         125 ns         209 ns
-Map put        5.16 M      193.91 ns ±15937.02%         125 ns         167 ns
+Map get       10.92 M       91.54 ns ±14534.79%          83 ns         125 ns
+Map put        7.95 M      125.78 ns ±25238.19%          83 ns         125 ns
 
 Comparison: 
-Map get        5.16 M
-Map put        5.16 M - 1.00x slower +0.0760 ns
+Map get       10.92 M
+Map put        7.95 M - 1.37x slower +34.24 ns
 
 ##### With input size 10000 #####
 Name              ips        average  deviation         median         99th %
-Map put        5.30 M      188.63 ns ±14311.70%         125 ns         208 ns
-Map get        4.55 M      219.61 ns ±14863.87%         167 ns         250 ns
+Map get        9.11 M      109.80 ns ±13974.75%          83 ns         125 ns
+Map put        8.09 M      123.65 ns ±24992.66%          83 ns         125 ns
 
 Comparison: 
-Map put        5.30 M
-Map get        4.55 M - 1.16x slower +30.98 ns
+Map get        9.11 M
+Map put        8.09 M - 1.13x slower +13.85 ns
 
 ##### With input size 100000 #####
 Name              ips        average  deviation         median         99th %
-Map put        5.23 M      191.33 ns ±15712.50%         125 ns         167 ns
-Map get        4.16 M      240.42 ns  ±7451.18%         208 ns         583 ns
+Map get        8.16 M      122.55 ns ±15375.64%          84 ns         209 ns
+Map put        6.86 M      145.67 ns  ±2532.76%      120.90 ns      162.50 ns
 
 Comparison: 
-Map put        5.23 M
-Map get        4.16 M - 1.26x slower +49.09 ns
+Map get        8.16 M
+Map put        6.86 M - 1.19x slower +23.12 ns
 ```
 
 The operations of `Map.get/3` and `Map.put/3` work in logarithmic time, which means that the time it takes to find keys grows as the map grows, but it's not directly proportional to the map size. 
