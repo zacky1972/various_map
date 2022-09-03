@@ -287,14 +287,13 @@ MapGraph.put        1.78 M - 1.83x slower +253.89 ns
 Run `mix run -r bench/ets_map_bench.exs`, then you'll get results similar to the following:
 
 ```
-% mix run -r bench/ets_map_bench.exs  
-Compiling 1 file (.ex)
+% mix run -r bench/ets_map_bench.exs
 Operating System: macOS
-CPU Information: Apple M1
+CPU Information: Apple M2
 Number of Available Cores: 8
-Available memory: 16 GB
-Elixir 1.14.0-rc.1
-Erlang 25.0.3
+Available memory: 24 GB
+Elixir 1.14.0
+Erlang 25.0.4
 
 Benchmark suite executing with the following configuration:
 warmup: 2 s
@@ -318,48 +317,48 @@ Benchmarking ETS Map put with input size 100000 ...
 
 ##### With input size 10 #####
 Name                  ips        average  deviation         median         99th %
-ETS Map get      345.20 K        2.90 μs    ±24.79%        2.80 μs        5.22 μs
-ETS Map put      335.31 K        2.98 μs    ±27.85%        2.88 μs        5.28 μs
+ETS Map get      367.06 K        2.72 μs    ±11.40%        2.67 μs        3.49 μs
+ETS Map put      358.20 K        2.79 μs    ±10.34%        2.75 μs        3.63 μs
 
 Comparison: 
-ETS Map get      345.20 K
-ETS Map put      335.31 K - 1.03x slower +0.0854 μs
+ETS Map get      367.06 K
+ETS Map put      358.20 K - 1.02x slower +0.0674 μs
 
 ##### With input size 100 #####
 Name                  ips        average  deviation         median         99th %
-ETS Map get       10.50 M      0.0952 μs    ±98.08%      0.0840 μs       0.125 μs
-ETS Map put      0.0394 M       25.38 μs     ±2.86%       25.18 μs       27.85 μs
+ETS Map get       10.11 M      0.0989 μs    ±37.50%      0.0840 μs       0.125 μs
+ETS Map put      0.0415 M       24.11 μs     ±3.89%       23.80 μs       26.77 μs
 
 Comparison: 
-ETS Map get       10.50 M
-ETS Map put      0.0394 M - 266.58x slower +25.29 μs
+ETS Map get       10.11 M
+ETS Map put      0.0415 M - 243.84x slower +24.01 μs
 
 ##### With input size 1000 #####
 Name                  ips        average  deviation         median         99th %
-ETS Map get        2.90 K      344.34 μs     ±1.90%      343.56 μs      363.19 μs
-ETS Map put        2.82 K      354.14 μs     ±3.78%      351.93 μs      382.72 μs
+ETS Map get        2.92 K      342.08 μs     ±1.93%      341.70 μs      357.35 μs
+ETS Map put        2.91 K      343.56 μs     ±2.44%      341.52 μs      367.19 μs
 
 Comparison: 
-ETS Map get        2.90 K
-ETS Map put        2.82 K - 1.03x slower +9.80 μs
+ETS Map get        2.92 K
+ETS Map put        2.91 K - 1.00x slower +1.48 μs
 
 ##### With input size 10000 #####
 Name                  ips        average  deviation         median         99th %
-ETS Map put        3.09 M      323.18 ns   ±119.19%         250 ns     3153.70 ns
-ETS Map get        2.47 M      405.37 ns   ±172.39%         208 ns     3503.25 ns
+ETS Map get        260.82        3.83 ms     ±4.39%        3.82 ms        5.15 ms
+ETS Map put        258.13        3.87 ms     ±1.33%        3.88 ms        4.02 ms
 
 Comparison: 
-ETS Map put        3.09 M
-ETS Map get        2.47 M - 1.25x slower +82.19 ns
+ETS Map get        260.82
+ETS Map put        258.13 - 1.01x slower +0.0399 ms
 
 ##### With input size 100000 #####
 Name                  ips        average  deviation         median         99th %
-ETS Map put      435.91 K        2.29 μs    ±64.56%        1.83 μs       11.48 μs
-ETS Map get      311.11 K        3.21 μs    ±53.78%        2.85 μs       14.58 μs
+ETS Map put      566.85 K        1.76 μs    ±82.06%        0.71 μs        5.14 μs
+ETS Map get      447.76 K        2.23 μs    ±63.62%        2.50 μs        5.19 μs
 
 Comparison: 
-ETS Map put      435.91 K
-ETS Map get      311.11 K - 1.40x slower +0.92 μs
+ETS Map put      566.85 K
+ETS Map get      447.76 K - 1.27x slower +0.47 μs
 ```
 
 ### MnesiaMap and Benchmark of it
