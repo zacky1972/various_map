@@ -43,7 +43,9 @@ defmodule VariousMap.EtsGraph do
   """
   @spec delete(t()) :: t()
   def delete(graph) do
-    Ets.delete(graph)
+    Ets.delete(get_graph_atom(graph))
+    Ets.delete(@global_ets, graph)
+    graph
   end
 
   defp get_graph_atom(graph) do
