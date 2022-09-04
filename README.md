@@ -634,6 +634,188 @@ EtsGraph.put        0.95 M - 3.67x slower +0.77 μs
 4. Total execution time of generating the graph in this case is 21,322.16 msec. It is 1.07 times faster than that of `MapGraph`. 
 5. About 93% is the ratio of generating the graph to `EtsGraph.put`, and about 7% is some overheads. This is 2.4 times less than that of `MapGraph`.
 
+
+### MnesiaGraph and Benchmark of it
+
+`VariousMap.MnesiaGraph` is a module for a global graph that can use for a directed graph using Mnesia.
+
+
+Run `mix run -r bench/mnesia_graph_bench.exs`, then you'll get results similar to the following:
+
+```
+% mix run -r bench/mnesia_graph_bench.exs
+time of create random_edges: 0.65msec.
+time of create random_edges: 2.954msec.
+time of create random_edges: 612.574msec.
+time of create random_edges: 24972.64msec.
+time of create MnesiaGraph: 4.301msec
+time of create MnesiaGraph: 1.969msec
+time of create MnesiaGraph: 2.784msec
+time of create MnesiaGraph: 2.441msec
+time of create MnesiaGraph: 3.853msec
+time of create MnesiaGraph: 139.017msec
+time of create MnesiaGraph: 15.735msec
+time of create MnesiaGraph: 29.552msec
+time of create MnesiaGraph: 18311.401msec
+time of create MnesiaGraph: 91.298msec
+time of create MnesiaGraph: 180.053msec
+time of create MnesiaGraph: 532464.164msec
+Operating System: macOS
+CPU Information: Apple M2
+Number of Available Cores: 8
+Available memory: 24 GB
+Elixir 1.14.0
+Erlang 25.0.4
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+reduction time: 0 ns
+parallel: 1
+inputs: Graph {num_vertex, num_edge} = {10, 10}, Graph {num_vertex, num_edge} = {10, 20}, Graph {num_vertex, num_edge} = {10, 90}, Graph {num_vertex, num_edge} = {100, 100}, Graph {num_vertex, num_edge} = {100, 200}, Graph {num_vertex, num_edge} = {100, 9900}, Graph {num_vertex, num_edge} = {1000, 1000}, Graph {num_vertex, num_edge} = {1000, 2000}, Graph {num_vertex, num_edge} = {1000, 999000}, Graph {num_vertex, num_edge} = {5000, 10000}, Graph {num_vertex, num_edge} = {5000, 24995000}, Graph {num_vertex, num_edge} = {5000, 5000}
+Estimated total run time: 2.80 min
+
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {10, 10} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {10, 20} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {10, 90} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {100, 100} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {100, 200} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {100, 9900} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {1000, 1000} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {1000, 2000} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {1000, 999000} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {5000, 10000} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {5000, 24995000} ...
+Benchmarking MnesiaGraph.get with input Graph {num_vertex, num_edge} = {5000, 5000} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {10, 10} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {10, 20} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {10, 90} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {100, 100} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {100, 200} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {100, 9900} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {1000, 1000} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {1000, 2000} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {1000, 999000} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {5000, 10000} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {5000, 24995000} ...
+Benchmarking MnesiaGraph.put with input Graph {num_vertex, num_edge} = {5000, 5000} ...
+
+##### With input Graph {num_vertex, num_edge} = {10, 10} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.put       54.56 K       18.33 μs    ±16.47%       17.88 μs       26.33 μs
+MnesiaGraph.get       53.58 K       18.66 μs    ±25.68%       18.21 μs       27.42 μs
+
+Comparison: 
+MnesiaGraph.put       54.56 K
+MnesiaGraph.get       53.58 K - 1.02x slower +0.34 μs
+
+##### With input Graph {num_vertex, num_edge} = {10, 20} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       54.80 K       18.25 μs    ±26.60%       17.83 μs       27.63 μs
+MnesiaGraph.put       54.76 K       18.26 μs    ±17.20%       17.83 μs       26.25 μs
+
+Comparison: 
+MnesiaGraph.get       54.80 K
+MnesiaGraph.put       54.76 K - 1.00x slower +0.0149 μs
+
+##### With input Graph {num_vertex, num_edge} = {10, 90} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       54.47 K       18.36 μs    ±26.11%       17.96 μs          27 μs
+MnesiaGraph.put       54.43 K       18.37 μs    ±16.01%       17.92 μs       26.25 μs
+
+Comparison: 
+MnesiaGraph.get       54.47 K
+MnesiaGraph.put       54.43 K - 1.00x slower +0.0117 μs
+
+##### With input Graph {num_vertex, num_edge} = {100, 100} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.put       53.80 K       18.59 μs    ±24.04%       18.13 μs       26.83 μs
+MnesiaGraph.get       46.86 K       21.34 μs    ±54.82%       17.29 μs       64.17 μs
+
+Comparison: 
+MnesiaGraph.put       53.80 K
+MnesiaGraph.get       46.86 K - 1.15x slower +2.75 μs
+
+##### With input Graph {num_vertex, num_edge} = {100, 200} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       57.85 K       17.29 μs    ±79.87%       16.63 μs       26.13 μs
+MnesiaGraph.put       54.30 K       18.42 μs    ±16.74%          18 μs       26.46 μs
+
+Comparison: 
+MnesiaGraph.get       57.85 K
+MnesiaGraph.put       54.30 K - 1.07x slower +1.13 μs
+
+##### With input Graph {num_vertex, num_edge} = {100, 9900} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       58.99 K       16.95 μs    ±30.83%       16.42 μs       24.54 μs
+MnesiaGraph.put       54.71 K       18.28 μs    ±16.94%       17.79 μs       26.50 μs
+
+Comparison: 
+MnesiaGraph.get       58.99 K
+MnesiaGraph.put       54.71 K - 1.08x slower +1.33 μs
+
+##### With input Graph {num_vertex, num_edge} = {1000, 1000} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.put       53.75 K       18.60 μs    ±25.63%       18.08 μs       27.17 μs
+MnesiaGraph.get       53.53 K       18.68 μs  ±1544.73%       16.38 μs       31.13 μs
+
+Comparison: 
+MnesiaGraph.put       53.75 K
+MnesiaGraph.get       53.53 K - 1.00x slower +0.0763 μs
+
+##### With input Graph {num_vertex, num_edge} = {1000, 2000} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       60.40 K       16.56 μs    ±30.60%       16.04 μs       24.08 μs
+MnesiaGraph.put       53.82 K       18.58 μs    ±16.45%       18.08 μs       26.92 μs
+
+Comparison: 
+MnesiaGraph.get       60.40 K
+MnesiaGraph.put       53.82 K - 1.12x slower +2.02 μs
+
+##### With input Graph {num_vertex, num_edge} = {1000, 999000} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       59.03 K       16.94 μs    ±30.41%       16.42 μs       24.58 μs
+MnesiaGraph.put       45.05 K       22.20 μs   ±274.81%       18.54 μs       73.96 μs
+
+Comparison: 
+MnesiaGraph.get       59.03 K
+MnesiaGraph.put       45.05 K - 1.31x slower +5.25 μs
+
+##### With input Graph {num_vertex, num_edge} = {5000, 10000} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       60.20 K       16.61 μs    ±19.91%       16.21 μs       23.79 μs
+MnesiaGraph.put       54.23 K       18.44 μs    ±26.21%       17.96 μs       26.50 μs
+
+Comparison: 
+MnesiaGraph.get       60.20 K
+MnesiaGraph.put       54.23 K - 1.11x slower +1.83 μs
+
+##### With input Graph {num_vertex, num_edge} = {5000, 24995000} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       56.05 K       17.84 μs    ±35.85%       17.13 μs       26.79 μs
+MnesiaGraph.put       53.50 K       18.69 μs    ±48.00%       18.04 μs       27.63 μs
+
+Comparison: 
+MnesiaGraph.get       56.05 K
+MnesiaGraph.put       53.50 K - 1.05x slower +0.85 μs
+
+##### With input Graph {num_vertex, num_edge} = {5000, 5000} #####
+Name                      ips        average  deviation         median         99th %
+MnesiaGraph.get       58.86 K       16.99 μs    ±25.95%       16.46 μs       24.75 μs
+MnesiaGraph.put       53.76 K       18.60 μs    ±24.24%       18.13 μs       26.79 μs
+
+Comparison: 
+MnesiaGraph.get       58.86 K
+MnesiaGraph.put       53.76 K - 1.09x slower +1.61 μs
+```
+
+1. The maximum number of edges when the number of vertexes is 5,000 is 24,995,000. 
+2. The average execution time of `MnesiaGraph.put` in this case is 18.69 μs.
+3. Then, total execution time of `MnesiaGraph.put` when generating the graph in this case is 467,156.55 msec.
+4. Total execution time of generating the graph in this case is 532,464.164 msec. It is and 23.3 and 25.0 times slower than that of `MapGraph` and `EtsGraph`, respectively. 
+5. About 88% is the ratio of generating the graph to `MnesiaGraph.put`, and about 12% is some overheads. This is 1.4 times less than that of `MapGraph`, and is 1.7 times more than that of `EtsGraph`.
+
 ## License
 
 Copyright (c) 2022 University of Kitakyushu
