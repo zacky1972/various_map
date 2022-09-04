@@ -43,7 +43,9 @@ defmodule VariousMap.EtsGraph do
   """
   @spec delete(t()) :: t()
   def delete(graph) do
-    Ets.delete(graph)
+    Ets.delete(get_graph_atom(graph))
+    Ets.delete(@global_ets, graph)
+    graph
   end
 
   defp get_graph_atom(graph) do
@@ -90,7 +92,7 @@ defmodule VariousMap.EtsGraph do
     v_size = get_graph_size(graph)
 
     if v_size < vertex1 or v_size < vertex2 do
-      raise ArgumentError, "Sizeout: (#{vertex1}, #[vertex2}) should be less than #{v_size}"
+      raise ArgumentError, "Sizeout: (#{vertex1}, #{vertex2}) should be less than #{v_size}"
     end
 
     graph_atom = get_graph_atom(graph)
