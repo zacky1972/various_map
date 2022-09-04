@@ -448,10 +448,10 @@ MapGraph.put        2.64 M - 2.46x slower +224.62 ns
 ```
 
 1. The maximum number of edges when the number of vertexes is 5,000 is 24,995,000. 
-2. The average execution time of `MapGraph.put` in this case is 1.06 μs.
-3. Then, total execution time of `MapGraph.put` when generating the graph in this case is 26,496.7 msec.
-4. But, total execution time of generating the graph in this case is 41,416.62 msec.
-5. About 64% is the ratio of generating the graph to `MapGraph.put`, and about 36% is some overheads. What does the overheads arise from?
+2. The average execution time of `MapGraph.put` in this case is 760.03 ns.
+3. Then, total execution time of `MapGraph.put` when generating the graph in this case is 18,996.9 msec.
+4. But, total execution time of generating the graph in this case is 22,880.225 msec.
+5. About 83% is the ratio of generating the graph to `MapGraph.put`, and about 17% is some overheads. What does the overheads arise from?
 
 ### EtsGraph and Benchmark of it
 
