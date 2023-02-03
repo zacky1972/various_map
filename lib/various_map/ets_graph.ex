@@ -156,7 +156,9 @@ defmodule VariousMap.EtsGraph do
 
     graph_atom = get_graph_atom(graph)
     index_min = get_index(v_size, vertex, 1)
-    index_max = index_min + v_size
+    index_max = index_min + v_size - 1
+
+    IO.inspect(index_min..index_max, label: "index_min..index_max")
 
     Ets.select(graph_atom, [
       {{:"$1", :"$2"}, [{:andalso, {:"=<", index_min, :"$1"}, {:"=<", :"$1", index_max}}],
